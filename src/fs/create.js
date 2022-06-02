@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import fsPromises from 'fs/promises';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -9,7 +9,7 @@ export const create = async () => {
   const file = `${__dirname}/files/fresh.txt`;
   const data = 'I am fresh and young';
 
-  return writeFile(file, data, { flag: 'wx' }).catch((err) => {
+  return fsPromises.writeFile(file, data, { flag: 'wx' }).catch((err) => {
     if (err.code === 'EEXIST') throw new Error('FS operation failed');
     else throw err;
   });
